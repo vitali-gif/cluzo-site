@@ -1,206 +1,250 @@
 // עמוד הבית של reports.vitas.co.il הוא גם העמוד שגוגל בודקת באימות המותג
-// (Brand Verification) ובבקשה לרמת Basic של Google Ads API. לכן השם, הלוגו
-// ותיאור השימוש ב-API כאן חייבים להתאים למה שמוגדר ב-Google Cloud (Cluzo by
-// Vitas + /brand/cluzo/icon-512.png) ולמדיניות הפרטיות ב-vitas.co.il/privacy.
-// שינוי באחד מהם בלי השני = אי-התאמה שגוגל דוחה עליה. (10.10: השם הוחלף כאן
-// מ-Tovno ל-Cluzo; את מסך ההסכמה ב-Google Cloud ויטלי מעדכן אחרי הפריסה.)
+// (Brand Verification) ובבקשה לרמת Basic של Google Ads API. לכן חייבים להישאר בו:
+// השם "Cluzo by Vitas", הלוגו, הסקשן "How we use the Google Ads API" (באנגלית, כמו
+// שגוגל קראה אותו), וקישורים ל-vitas.co.il/privacy ול-vitas.co.il/terms.
+// icon-512.png שגוגל מכירה נשאר ב-vitas-reports/public/brand/cluzo — לא להזיז.
 //
-// העמוד הועבר לכאן מ-vitas-reports/app/page.js כמו שהוא. הוא מוגש בכתובת
-// reports.vitas.co.il דרך rewrite שם (CLUZO_SITE_URL). icon-512.png שגוגל מכירה
-// נשאר ב-vitas-reports/public/brand/cluzo — לא להזיז.
+// המבנה והעיצוב: .taste-skill/direction.json (כיוון "One motif" — הסמל של Cluzo הוא המוטיב).
+// המספרים בקטעי הדשבורד: app/demo-data.js (פרויקט ההדגמה "אופק ים").
+import Motif from './components/Motif'
+import HeroPanel from './components/HeroPanel'
+import Calculator from './components/Calculator'
+import Showcase from './components/Showcase'
+import LeadForm from './components/LeadForm'
+import Reveal from './components/Reveal'
+
 export const metadata = {
-  title: 'Cluzo by Vitas - Marketing Performance Reports',
-  description: 'Cluzo by Vitas is a unified marketing performance dashboard built by VITAS Digital Marketing. It consolidates Meta Ads and Google Ads data into a single reporting platform.',
+  title: 'Cluzo by Vitas — דשבורד שיווק ומכירות ליזמי נדל״ן',
+  description:
+    'פייסבוק, גוגל וה-CRM בדשבורד אחד: עלות לליד, לפגישה ולחוזה, זמני תגובה של אנשי המכירות, מקורות הלידים ודוח PDF חודשי. Cluzo by Vitas, מבית VITAS Digital Marketing.',
 }
 
-// הלוגו הלבן — אותו קובץ שבסיידבר של הדשבורד. הרקע כאן כהה.
-function Logo({ height = 90 }) {
-  return (
-    <img
-      src="/site-assets/brand/cluzo/cluzo-logo-dark.svg"
-      alt="Cluzo by Vitas"
-      height={height}
-      style={{ display: 'block', height, width: 'auto' }}
-    />
-  )
-}
+const A = '/site-assets/brand/cluzo'
 
 export default function Home() {
   return (
-    <div
-      dir="ltr"
-      style={{
-        fontFamily: "'Heebo', system-ui, sans-serif",
-        background: '#0b1220',
-        color: '#e2e8f0',
-        minHeight: '100vh',
-        margin: 0,
-        textAlign: 'left',
-      }}
-    >
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-      />
+    <>
+      <Reveal />
 
-      {/* Header */}
-      <header style={{ maxWidth: 1100, margin: '0 auto', padding: '28px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-        <div style={{ color: '#e8e8e8' }}>
-          <Logo height={60} />
+      {/* ═══ פתיחה: הכרטיס ליד הדשבורד ═══ */}
+      <header className="hero" id="top">
+        <div className="hero__card">
+          <Motif className="hero__motif" />
+          <img className="hero__logo" src={`${A}/cluzo-logo-light.svg`} alt="Cluzo by Vitas" width="236" height="83" />
+          <div className="hero__body">
+            <h1 className="hero__title">תדעו מה מוכר דירות</h1>
+            <p className="hero__sub">
+              Cluzo מחבר את פייסבוק, גוגל וה-CRM לדשבורד אחד: כמה עלה כל ליד, כל פגישה וכל חוזה, וכמה מהר
+              הצוות שלכם חוזר ללידים.
+            </p>
+            <a className="btn" href="#demo">בקשת הדגמה</a>
+          </div>
+          <nav className="hero__links" aria-label="ניווט">
+            <a href="#features">מה מקבלים</a>
+            <a href="#calc">המחשבון</a>
+            <a href="#screens">ככה זה נראה</a>
+            <a href="/client">כניסה ללקוחות</a>
+          </nav>
         </div>
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <a href="#contact" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 500, fontSize: '0.95em' }}>Contact</a>
-          <a href="/admin" style={{ background: '#3b82f6', color: 'white', padding: '10px 22px', borderRadius: 8, textDecoration: 'none', fontWeight: 600, fontSize: '0.95em' }}>Admin Login →</a>
+        <div className="hero__room">
+          <HeroPanel />
         </div>
       </header>
 
-      {/* Hero */}
-      <section style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 24px 60px' }}>
-        <h1 style={{ fontSize: '2.8em', fontWeight: 900, lineHeight: 1.1, margin: '0 0 20px', letterSpacing: '-0.5px', maxWidth: 900 }}>
-          Unified Digital Marketing Reporting for Agencies and Advertisers
-        </h1>
-        <p style={{ fontSize: '1.15em', color: '#94a3b8', lineHeight: 1.7, margin: '0 0 26px', maxWidth: 820 }}>
-          Cluzo by Vitas is a proprietary reporting dashboard built by VITAS Digital Marketing. It consolidates campaign performance data from multiple advertising platforms - including Meta Ads (Facebook / Instagram) and Google Ads - into a single, unified interface that agencies and advertisers use to track spend, leads, cost-per-lead, and ad creative performance across all their clients and projects in real time.
-        </p>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          <span style={{ background: 'rgba(59,130,246,0.15)', color: '#93c5fd', padding: '6px 14px', borderRadius: 20, fontSize: '0.85em', fontWeight: 600 }}>Meta Marketing API</span>
-          <span style={{ background: 'rgba(251,146,60,0.15)', color: '#fdba74', padding: '6px 14px', borderRadius: 20, fontSize: '0.85em', fontWeight: 600 }}>Google Ads API</span>
-          <span style={{ background: 'rgba(16,185,129,0.15)', color: '#6ee7b7', padding: '6px 14px', borderRadius: 20, fontSize: '0.85em', fontWeight: 600 }}>Next.js + Supabase</span>
-          <span style={{ background: 'rgba(139,92,246,0.15)', color: '#c4b5fd', padding: '6px 14px', borderRadius: 20, fontSize: '0.85em', fontWeight: 600 }}>Read-only API access</span>
-        </div>
-      </section>
+      <main>
+        {/* ═══ מה מפסידים ═══ */}
+        <section className="loss" aria-labelledby="loss-h">
+          <h2 className="h2" id="loss-h" data-rv>מה הולך לאיבוד כשלא רואים</h2>
+          <p className="loss__text" data-rv style={{ '--i': 1 }}>
+            ‏19 לידים מפורטל{' '}
+            <span className="thumb thumb--chip" data-ui aria-hidden="true"><b>0</b>/19</span>, אף לא אחד רלוונטי. ליד
+            משישי{' '}
+            <span className="thumb thumb--clock" data-ui aria-hidden="true">14:02</span>{' '}
+            שחיכה לראשון. ואיש מכירות{' '}
+            <span className="thumb thumb--disc" data-ui aria-hidden="true">מל</span>{' '}
+            שחזר כשהלקוח כבר קנה.
+          </p>
+          <p className="loss__note" data-rv style={{ '--i': 2 }}>
+            בדשבורד כל אחד מהם מופיע לבד, עוד באותו שבוע, ולא בסיכום של סוף הרבעון.
+          </p>
+        </section>
 
-      {/* Features */}
-      <section style={{ background: '#111827', padding: '56px 24px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={{ fontSize: '1.9em', fontWeight: 800, marginTop: 0, marginBottom: 28 }}>What the platform does</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 18 }}>
-            <div style={{ background: '#0b1220', padding: 24, borderRadius: 12, borderLeft: '4px solid #3b82f6' }}>
-              <div style={{ fontSize: '1.05em', fontWeight: 700, marginBottom: 8 }}>Unified campaign performance</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.95em', lineHeight: 1.6 }}>
-                Pulls insights from Meta Ads and Google Ads via their official APIs (read-only), aggregates by client and project, and shows spend, impressions, clicks, leads, CPL, CPM, CTR, frequency, and conversion rate in a single view.
-              </div>
+        {/* ═══ מה מקבלים ═══ */}
+        <section className="board" id="features" aria-labelledby="features-h">
+          <div className="tile tile--head" data-rv>
+            <h2 className="h2" id="features-h">מה מקבלים</h2>
+          </div>
+
+          <div className="tile tile--dates" data-rv style={{ '--i': 1 }}>
+            <div className="mag mag--dates" data-ui aria-hidden="true">
+              <span className="chip is-on">החודש</span>
+              <span className="chip">חודש קודם</span>
+              <span className="chip">רבעון</span>
+              <span className="chip">מתחילת השיווק</span>
             </div>
-            <div style={{ background: '#0b1220', padding: 24, borderRadius: 12, borderLeft: '4px solid #10b981' }}>
-              <div style={{ fontSize: '1.05em', fontWeight: 700, marginBottom: 8 }}>Per-project dashboards</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.95em', lineHeight: 1.6 }}>
-                Agency-style project breakdown - each client can have multiple active projects, each with its own monthly report, campaign tables, ad creative library, and demographic breakdowns.
-              </div>
+            <div className="tile__cap"><h3>כל טווח תאריכים, מיד</h3><p>שבוע, חודש, רבעון או מתחילת השיווק. בלי לחכות לטעינה.</p></div>
+          </div>
+
+          <div className="tile tile--cost" data-rv style={{ '--i': 2 }}>
+            <div className="mag mag--cost" data-ui aria-hidden="true">
+              <span className="mag__label">עלות לחוזה</span>
+              <span className="mag__fig">₪7,825</span>
             </div>
-            <div style={{ background: '#0b1220', padding: 24, borderRadius: 12, borderLeft: '4px solid #8b5cf6' }}>
-              <div style={{ fontSize: '1.05em', fontWeight: 700, marginBottom: 8 }}>Month-over-month comparison</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.95em', lineHeight: 1.6 }}>
-                Every KPI is displayed alongside the previous month&apos;s value, with automatic trend indicators so agencies can quickly see which campaigns are improving or declining.
-              </div>
+            <div className="tile__cap"><h3>עלות לליד, לפגישה ולחוזה</h3><p>לפי ערוץ, ולא רק מה שפייסבוק מדווח.</p></div>
+          </div>
+
+          <div className="tile tile--pdf" data-rv style={{ '--i': 3 }}>
+            <div className="mag mag--pdf" data-ui aria-hidden="true">
+              <span className="pdf__brand"><Motif className="pdf__mark" /> דוח חודשי</span>
+              <span className="pdf__title">אופק ים</span>
+              <span className="pdf__row"><span>לידים</span><b>143</b></span>
+              <span className="pdf__row"><span>פגישות</span><b>24</b></span>
+              <span className="pdf__row"><span>חוזים</span><b>5</b></span>
             </div>
-            <div style={{ background: '#0b1220', padding: 24, borderRadius: 12, borderLeft: '4px solid #f59e0b' }}>
-              <div style={{ fontSize: '1.05em', fontWeight: 700, marginBottom: 8 }}>Private client accounts</div>
-              <div style={{ color: '#94a3b8', fontSize: '0.95em', lineHeight: 1.6 }}>
-                Each client signs in to a personal account and sees only the projects the agency has granted them. Access is enforced on the server for every request, so a client can never view another client&apos;s data.
-              </div>
+            <div className="tile__cap"><h3>דוח PDF חודשי</h3><p>מוכן להנהלה, לשותפים ולבנק המלווה.</p></div>
+          </div>
+
+          <div className="tile tile--sources" data-rv style={{ '--i': 1 }}>
+            <div className="mag mag--sources" data-ui aria-hidden="true">
+              <span className="src-row"><span className="src">Facebook</span><span className="src">Google Ads</span></span>
+              <span className="src-row"><span className="src">BMBY</span><span className="src">Salesforce</span><span className="src">Zoho</span><span className="src">Fireberry</span></span>
             </div>
+            <div className="tile__cap"><h3>פייסבוק, גוגל וה-CRM במקום אחד</h3><p>BMBY, ‏Salesforce, ‏Zoho או Fireberry. מתעדכן לבד כמה פעמים ביום.</p></div>
+          </div>
+
+          <div className="tile tile--speed" data-rv style={{ '--i': 2 }}>
+            <div className="mag mag--speed" data-ui aria-hidden="true">
+              <span className="disc">רא</span>
+              <span className="mag__fig">37 דק׳</span>
+            </div>
+            <div className="tile__cap"><h3>זמן תגובה לכל איש מכירות</h3><p>וכמה לידים לא קיבלו מענה בכלל.</p></div>
+          </div>
+
+          <div className="tile tile--share" data-rv style={{ '--i': 3 }}>
+            <div className="mag mag--share" data-ui aria-hidden="true">
+              <span className="share__row"><span>פורטל נדל״ן א׳</span><b>19 לידים</b></span>
+              <span className="share__row share__row--zero"><span>רלוונטיים</span><b>0</b></span>
+            </div>
+            <div className="tile__cap"><h3>מקורות הלידים</h3><p>איזה מקור מביא עסקאות, ואיזה רק כמות.</p></div>
+          </div>
+
+          <div className="tile tile--compare" data-rv style={{ '--i': 4 }}>
+            <div className="mag mag--compare" data-ui aria-hidden="true">
+              <span className="cmp"><span>פגישות</span><b>24</b><em>23 בחודש הקודם</em></span>
+              <span className="cmp"><span>עלות לפגישה</span><b>₪1,739</b><em>₪2,393 בחודש הקודם</em></span>
+            </div>
+            <div className="tile__cap"><h3>השוואה לחודש הקודם</h3><p>כל מספר ליד הקודם שלו, כדי לראות לאן זה הולך.</p></div>
+          </div>
+        </section>
+
+        {/* ═══ פס הצילום: האתר שכל ליד מיועד לו ═══ */}
+        <figure className="band" data-rv>
+          <div className="band__frame">
+          <img
+            src="/site-assets/photos/tel-aviv-crane-tower.jpg"
+            alt="מגדל מגורים חדש ועגורן מעל בניין ישן בתל אביב"
+            width="1920"
+            height="1272"
+            loading="lazy"
+          />
+          </div>
+        </figure>
+
+        {/* ═══ המחשבון ═══ */}
+        <section className="calc" id="calc" aria-labelledby="calc-h">
+          <Calculator
+            heading={<h2 className="calc__q" id="calc-h" data-rv>כמה עולה ליד שלא חזרו אליו?</h2>}
+            how={
+              <p className="calc__how" data-rv style={{ '--i': 2 }}>
+                לידים בחודש, כפול האחוז שלא חזרו אליהם בתוך שעה, כפול העלות לליד, כפול 12 חודשים. זה רק כסף
+                הפרסום, עוד לפני הדירות שלא נמכרו.
+              </p>
+            }
+          />
+        </section>
+
+        {/* ═══ ככה זה נראה ═══ */}
+        <section className="screens" id="screens" aria-label="ככה זה נראה בדשבורד">
+          <Showcase />
+        </section>
+
+        {/* ═══ בקשת הדגמה ═══ */}
+        <section className="contact" id="demo" aria-labelledby="demo-h">
+          <div className="coupon" data-rv>
+            <div className="coupon__side">
+              <h2 className="coupon__title" id="demo-h">בקשת<br />הדגמה</h2>
+              <p>
+                20 דקות על פרויקט ההדגמה, ואחריהן הצעה מותאמת לפרויקט שלכם. בלי מחירון ובלי התחייבות.
+              </p>
+            </div>
+            <LeadForm />
+          </div>
+        </section>
+
+        {/* ═══ For Google reviewers — אל תמחקו, ראו הערה בראש הקובץ ═══ */}
+        <section className="api" lang="en" dir="ltr" aria-labelledby="api-h">
+          <h2 className="api__title" id="api-h">How we use the Google Ads API</h2>
+          <div className="api__cols">
+            <p>
+              Cluzo by Vitas is a proprietary reporting dashboard built by VITAS Digital Marketing. It consolidates
+              campaign performance data from multiple advertising platforms - including Meta Ads (Facebook / Instagram)
+              and Google Ads - into a single, unified interface that agencies and advertisers use to track spend,
+              leads, cost-per-lead, and ad creative performance across all their clients and projects in real time.
+            </p>
+            <p>
+              Cluzo by Vitas uses the Google Ads API in <strong>read-only mode</strong> to retrieve campaign, ad group,
+              ad, and performance metrics for the Google Ads accounts that our MCC manages. Retrieved data is
+              transformed into a common schema - identical to the schema used for Meta Ads data - and stored in a
+              Supabase Postgres database. Users of the platform view the data through the web dashboard; the API
+              itself is never exposed directly to end users or clients.
+            </p>
+            <p>
+              The API is called either on demand by a logged-in agency employee (via a &quot;Refresh&quot; button) or
+              automatically by scheduled jobs a few times a day, so that each client&apos;s report stays current. We
+              do not create, modify, pause, or delete campaigns through the API - all campaign management is done by
+              our team directly in the Google Ads UI. Refresh tokens are stored as encrypted environment variables in
+              Vercel and are never written to source code or logs.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      {/* ═══ סגירה: הסמל בגדול ═══ */}
+      <footer className="foot">
+        <div className="foot__mark">
+          <img className="foot__logo" src={`${A}/cluzo-logo-dark.svg`} alt="Cluzo by Vitas" width="1600" height="560" loading="lazy" />
+        </div>
+        <div className="foot__cols">
+          <nav aria-label="העמוד">
+            <a href="#features">מה מקבלים</a>
+            <a href="#calc">המחשבון</a>
+            <a href="#screens">ככה זה נראה</a>
+            <a href="#demo">בקשת הדגמה</a>
+          </nav>
+          <nav aria-label="כניסה">
+            <a href="/client">כניסה ללקוחות</a>
+            <a href="/admin">כניסת צוות</a>
+          </nav>
+          <nav aria-label="מסמכים">
+            <a href="https://vitas.co.il/privacy">מדיניות פרטיות (Privacy Policy)</a>
+            <a href="https://vitas.co.il/terms">תנאי שימוש (Terms of Service)</a>
+          </nav>
+          <div className="foot__contact">
+            <a href="mailto:vitali@vitas.co.il">vitali@vitas.co.il</a>
+            <span>Cluzo by Vitas, מבית VITAS Digital Marketing</span>
           </div>
         </div>
-      </section>
-
-      {/* API usage description (for Google reviewers) */}
-      <section style={{ padding: '56px 24px' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-          <h2 style={{ fontSize: '1.9em', fontWeight: 800, marginTop: 0, marginBottom: 20 }}>How we use the Google Ads API</h2>
-          <p style={{ color: '#94a3b8', lineHeight: 1.75, fontSize: '1em', maxWidth: 900 }}>
-            Cluzo by Vitas uses the Google Ads API in <strong style={{ color: '#e2e8f0' }}>read-only mode</strong> to retrieve campaign, ad group, ad, and performance metrics for the Google Ads accounts that our MCC manages. Retrieved data is transformed into a common schema - identical to the schema used for Meta Ads data - and stored in a Supabase Postgres database. Users of the platform view the data through the web dashboard; the API itself is never exposed directly to end users or clients.
-          </p>
-          <p style={{ color: '#94a3b8', lineHeight: 1.75, fontSize: '1em', maxWidth: 900, marginTop: 16 }}>
-            The API is called either on demand by a logged-in agency employee (via a &quot;Refresh&quot; button) or automatically by scheduled jobs a few times a day, so that each client&apos;s report stays current. We do not create, modify, pause, or delete campaigns through the API - all campaign management is done by our team directly in the Google Ads UI. Refresh tokens are stored as encrypted environment variables in Vercel and are never written to source code or logs.
-          </p>
-        </div>
-      </section>
-
-      {/* Contact form */}
-      <section id="contact" style={{ background: '#111827', padding: '64px 24px' }}>
-        <div style={{ maxWidth: 680, margin: '0 auto' }}>
-          <h2 style={{ fontSize: '1.9em', fontWeight: 800, marginTop: 0, marginBottom: 10, textAlign: 'center' }}>Get in touch</h2>
-          <p style={{ color: '#94a3b8', textAlign: 'center', marginBottom: 36, fontSize: '1.02em', lineHeight: 1.6 }}>
-            Interested in Cluzo by Vitas? Leave your details and we&apos;ll get back to you.
-          </p>
-
-          <form
-            action="https://formsubmit.co/vitali@vitas.co.il"
-            method="POST"
-            style={{ display: 'grid', gap: 16 }}
-          >
-            <input type="hidden" name="_subject" value="New lead from reports.vitas.co.il" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="_next" value="https://reports.vitas.co.il/?submitted=1" />
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.9em', color: '#cbd5e1', marginBottom: 6, fontWeight: 500 }}>Full name *</label>
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="John Doe"
-                style={{ width: '100%', padding: '12px 14px', borderRadius: 8, border: '1px solid #334155', background: '#0b1220', color: '#e2e8f0', fontSize: '1em', fontFamily: 'inherit', boxSizing: 'border-box' }}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.9em', color: '#cbd5e1', marginBottom: 6, fontWeight: 500 }}>Phone *</label>
-              <input
-                type="tel"
-                name="phone"
-                required
-                placeholder="+972 50 123 4567"
-                style={{ width: '100%', padding: '12px 14px', borderRadius: 8, border: '1px solid #334155', background: '#0b1220', color: '#e2e8f0', fontSize: '1em', fontFamily: 'inherit', boxSizing: 'border-box' }}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.9em', color: '#cbd5e1', marginBottom: 6, fontWeight: 500 }}>Email *</label>
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="you@example.com"
-                style={{ width: '100%', padding: '12px 14px', borderRadius: 8, border: '1px solid #334155', background: '#0b1220', color: '#e2e8f0', fontSize: '1em', fontFamily: 'inherit', boxSizing: 'border-box' }}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontSize: '0.9em', color: '#cbd5e1', marginBottom: 6, fontWeight: 500 }}>Business name *</label>
-              <input
-                type="text"
-                name="business"
-                required
-                placeholder="Your business name"
-                style={{ width: '100%', padding: '12px 14px', borderRadius: 8, border: '1px solid #334155', background: '#0b1220', color: '#e2e8f0', fontSize: '1em', fontFamily: 'inherit', boxSizing: 'border-box' }}
-              />
-            </div>
-
-            <button
-              type="submit"
-              style={{ background: '#3b82f6', color: 'white', padding: '14px 24px', border: 'none', borderRadius: 8, fontWeight: 700, fontSize: '1em', cursor: 'pointer', fontFamily: 'inherit', marginTop: 8 }}
-            >
-              Submit →
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer style={{ background: '#080c14', padding: '26px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div style={{ maxWidth: 1100, margin: '0 auto', color: '#64748b', fontSize: '0.9em' }}>
-          <strong style={{ color: '#94a3b8' }}>Cluzo by Vitas</strong> · Built by VITAS Digital Marketing · Contact: vitali@vitas.co.il
-        </div>
-        {/* גוגל דורשת קישור למדיניות הפרטיות ולתנאי השימוש מעמוד הבית של האפליקציה. */}
-        <div style={{ maxWidth: 1100, margin: '10px auto 0', fontSize: '0.9em', display: 'flex', gap: 18, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="https://vitas.co.il/privacy" style={{ color: '#93c5fd', textDecoration: 'none' }}>Privacy Policy</a>
-          <a href="https://vitas.co.il/terms" style={{ color: '#93c5fd', textDecoration: 'none' }}>Terms of Service</a>
+        <p className="foot__credits">
+          צילום:{' '}
+          <a href="https://commons.wikimedia.org/wiki/File:Tel_aviv_landscape_crane_construction_site_public_domain_16.jpg">Tel aviv landscape crane construction site 16</a>
+          , Equalhuman,{' '}
+          <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en">CC0</a>, דרך Wikimedia Commons.
+        </p>
+        <div className="foot__last">
+          <span>© 2026 VITAS Digital Marketing</span>
+          <a className="btn btn--sm" href="#demo">בקשת הדגמה</a>
         </div>
       </footer>
-    </div>
+    </>
   )
 }

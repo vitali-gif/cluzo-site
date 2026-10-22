@@ -3,3 +3,6 @@ node_modules/
 .vercel/
 .env*
 !.env.example
+assets/*.jpg
+.taste-skill/inspect/
+.taste-skill/*/inspect/
