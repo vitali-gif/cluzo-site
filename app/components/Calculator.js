@@ -20,7 +20,7 @@ export default function Calculator({ heading, how }) {
     <>
       <div className="calc__top">
         {heading}
-        <div className="calc__ui" data-ui data-rv style={{ '--i': 1 }}>
+        <div className="calc__ui" data-ui>
           {FIELDS.map((f) => (
             <label key={f.key} className="calc__field">
               <span className="calc__row">
@@ -41,7 +41,8 @@ export default function Calculator({ heading, how }) {
       </div>
 
       <div className="calc__bottom">
-        <p className="calc__figure" aria-live="polite" style={{ '--d': Math.max(7, digits) }} data-rv>
+        <p className="calc__label">כסף פרסום שהולך על לידים שלא טופלו</p>
+        <p className="calc__figure" aria-live="polite" style={{ "--d": Math.max(7, digits) }}>
           <bdi>{total.toLocaleString('en-US')}</bdi>
           <span className="calc__unit">₪ בשנה</span>
         </p>

@@ -62,3 +62,14 @@ export const REPS = [
 
 export const ils = (n) => '₪' + Math.round(n).toLocaleString('en-US')
 export const num = (n) => Math.round(n).toLocaleString('en-US')
+
+// לידים ופגישות שנקבעו לפי יום בשבוע (החודש הנוכחי).
+export const DAYS = [
+  { day: 'א׳', leads: 27, meetings: 3 },
+  { day: 'ב׳', leads: 30, meetings: 10 },
+  { day: 'ג׳', leads: 29, meetings: 9 },
+  { day: 'ד׳', leads: 26, meetings: 3 },
+  { day: 'ה׳', leads: 18, meetings: 6 },
+  { day: 'ו׳', leads: 6, meetings: 1 },
+  { day: 'ש׳', leads: 7, meetings: 2 },
+]
