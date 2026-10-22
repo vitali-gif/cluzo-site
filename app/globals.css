@@ -1,0 +1,10 @@
+/* אותם ערכי בסיס כמו ב-vitas-reports/app/globals.css, כדי שהעמוד ייראה זהה. */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { min-height: 100vh; }
+body {
+  margin: 0;
+  font-family: 'Heebo', system-ui, sans-serif;
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "tnum";
+}
