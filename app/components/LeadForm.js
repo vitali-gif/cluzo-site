@@ -25,11 +25,16 @@ export default function LeadForm() {
       <input type="hidden" name="_next" value="https://reports.vitas.co.il/?submitted=1#demo" />
       <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hp-trap" aria-hidden="true" />
 
-      <label><span className="sr">שם מלא</span><input name="name" autoComplete="name" placeholder="שם מלא" required /></label>
-      <label><span className="sr">טלפון</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="טלפון" required /></label>
-      <label><span className="sr">חברה או פרויקט</span><input name="business" autoComplete="organization" placeholder="חברה או פרויקט" required /></label>
-      <label><span className="sr">אימייל</span><input name="email" type="email" inputMode="email" autoComplete="email" placeholder="אימייל" /></label>
-      <button type="submit">שליחה</button>
+      <div className="field-row">
+        <label className="field"><span>שם מלא</span><input name="name" autoComplete="name" required /></label>
+        <label className="field"><span>טלפון</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" dir="ltr" placeholder="050-0000000" required /></label>
+      </div>
+      <label className="field"><span>שם הפרויקט או החברה</span><input name="business" autoComplete="organization" required /></label>
+      <label className="field"><span>אימייל <em>(לא חובה)</em></span><input name="email" type="email" inputMode="email" autoComplete="email" dir="ltr" /></label>
+      <button type="submit" onClick={(e) => { const f = e.currentTarget.form; if (f && f.checkValidity()) e.currentTarget.classList.add('is-sending') }}>
+        <span>קבעו הדגמה</span>
+      </button>
+      <p className="form-note">נחזור אליכם ביום העסקים הקרוב. בלי מחירון ובלי התחייבות.</p>
     </form>
   )
 }
